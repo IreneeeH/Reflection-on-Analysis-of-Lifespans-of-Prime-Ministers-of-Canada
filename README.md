@@ -1,8 +1,8 @@
-# Analysis of Lifespans of Prime Ministers of Canada
+# Reflection on Analysis of Lifespans of Prime Ministers of Canada
 
 ## Overview
 
-This repo consists of a paper titled "Analysis of Lifespans of Prime Ministers of Canada". The paper utilizes data retrieved from Wikipedia's list of prime ministers of Canada (https://en.wikipedia.org/wiki/List_of_prime_ministers_of_Canada).
+This repo consists of a paper titled "Reflection on Analysis of Lifespans of Prime Ministers of Canada". The paper utilizes data retrieved from Wikipedia's list of prime ministers of Canada (https://en.wikipedia.org/wiki/List_of_prime_ministers_of_Canada).
 
 ## File Structure
 
