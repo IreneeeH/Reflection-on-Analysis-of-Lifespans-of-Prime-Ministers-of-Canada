@@ -27,55 +27,7 @@ library(janitor)
 library(here)
 ```
 
-# Planning, Gathering, and Cleaning Sources
-
-The statistical programming language R was used to retrieve, clean, and process the data [@citeR]. In particular, the following R packages were used: tidyverse [@tidyverse], rvest [], and xml2 [] for data acquisition, knitr [@knitr], janitor [], dplyr [], and here [] for data cleaning and processing, and ggplot2 [@ggplot2] for creating figures.
-
-# Planning
-
-A simulation of the expected data set is found below, having the Prime Minister's name, their birth year, death year, and years lived as columns. The simulation was created using the following R packages: tidyverse [], babynames [], and pdftools [].
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-set.seed(853)
-
-simulated_dataset <-
-  tibble(
-    prime_minister = babynames |>
-      filter(prop > 0.01) |>
-      distinct(name) |>
-      unlist() |>
-      sample(size = 10, replace = FALSE),
-    birth_year = sample(1700:1990, size = 10, replace = TRUE),
-    years_lived = sample(50:100, size = 10, replace = TRUE),
-    death_year = birth_year + years_lived
-  ) |>
-  select(prime_minister, birth_year, death_year, years_lived) |>
-  arrange(birth_year)
-
-simulated_dataset
-```
-
-A sketch of the expected graph can be found below:
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# knitr::include_graphics("graph_sketch.pdf")
-```
-
-# Gathering
-
-The data utilized in this paper was retrieved from a Wikipedia page of the List of Prime Ministers of Canada [] using the rvest R package [].
-
-There is another element in pms.html with a wikitable class that precedes the desired table of Prime Ministers of Canada. This caused html_element(".wikitable") to use that table instead of the desired one. To resolve this issue, I went into pms.html and removed the wikitable class from that table. Now, html_element(".wikitable") should be able to identify the correct wikitable.
-
-# Cleaning
-While using the original code provided in Telling Stories With Data - 7 Gather data [], cleaning the data was difficult as the birth dates of Prime Ministers who are still alive did not appear. After some trial and error, I realized that the "born" attribute must be manipulated. Additionally, the finalized cleaned_data included a final row with extra information from the html file. To remove this, I had to filter it out.
+# Results
 
 ```{r}
 #| label: fig-primeministerslifespan
@@ -109,11 +61,72 @@ cleaned_data |>
   scale_color_brewer(palette = "Set1") +
   theme(legend.position = "bottom")
 ```
+Figure 1 reveals that John Thompson had the shortest lifespan out of all the prime ministers of Canada and was also much younger than his predecessors. Additionally, almost all prime ministers have died, except for seven that are still alive. This was expected as most of the prime ministers were born more than a hundred years ago.
 
-# Results
-Figure 1 reveals that John Thompson had the shortest lifespan, Additionally, 7 Prime Ministers are still alive. 
+# Planning, Gathering, and Cleaning Data Sources
 
-# Results {#sec-data}
+The statistical programming language R was used to retrieve, clean, and process the data [@citeR]. In particular, the following R packages were used: tidyverse [@tidyverse], rvest [@rvest], and xml2 [@xml2] for data acquisition; knitr [@knitr], janitor [@janitor], dplyr [@dplyr], and here [@here] for data cleaning and processing; and ggplot2 [@ggplot2] for creating figures. Additionally, babynames [@babynames] and pdftools [@pdftools] were used for simulating data.
+
+# Planning
+
+A simulation of the expected data set is found below, having the prime minister's name, their birth year, death year, and years lived as columns. The simulation was created using the following R packages: tidyverse [@tidyverse], babynames [@babynames], and pdftools [@pdftools].
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+set.seed(853)
+
+simulated_dataset <-
+  tibble(
+    prime_minister = babynames |>
+      filter(prop > 0.01) |>
+      distinct(name) |>
+      unlist() |>
+      sample(size = 10, replace = FALSE),
+    birth_year = sample(1700:1990, size = 10, replace = TRUE),
+    years_lived = sample(50:100, size = 10, replace = TRUE),
+    death_year = birth_year + years_lived
+  ) |>
+  select(prime_minister, birth_year, death_year, years_lived) |>
+  arrange(birth_year)
+
+simulated_dataset
+```
+
+A sketch of the expected graph can be found below:
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+knitr::include_graphics("../../inputs/sketches/graph_sketch.png")
+```
+
+# Gathering
+
+The code for the gathering of the data can be found in scripts/01-download_data.R
+
+The data utilized in this paper was retrieved from a Wikipedia page of the List of Prime Ministers of Canada [@WikiMinisters] using the rvest R package [@rvest].
+
+## Difficulties
+
+This aspect of the paper took longer than expected as there was another element in the original pms.html document with a wikitable class that precedes the desired table of prime ministers of Canada. This caused html_element(".wikitable") to use that table instead of the desired one. To resolve this issue, I went into pms.html and removed the wikitable class from the undesired table. Now, html_element(".wikitable") is able to identify the correct wikitable.
+
+# Cleaning
+
+The code for the cleaning of the data can be found in scripts/02-data_cleaning.R
+
+## Difficulties
+
+While using the original code provided in Telling Stories With Data - 7 Gather data [@TellingStories], cleaning the data was difficult as the birth dates of prime ministers who are still alive did not appear in the final figure. After some trial and error, I realized that the first "born" attribute must be manipulated to include the date: born = str_extract(not_name, "[[:digit:]]{4}"). Additionally, the finalized cleaned_data included a final row with extra information from the html file. To remove this, I had to filter it out using filter(substring(name, 1, 1) != ".") as it began with a period.
+
+# Comments
+
+Surprisingly, I was not upset that the code provided to us in Telling Stories With Data - 7 Gather data [@TellingStories] did not work flawlessly, rather, it was fun to go through the code and actually understand what was happening and be able to fix the errors. I enjoyed learning how to use and write regular expressions and use unfamiliar functions, such as html_element(). 
+
+If I were to do this paper again, I would start much earlier to prevent the anxious feeling of not understanding the code and worrying I won't fix errors in time. 
 
 \newpage
 
