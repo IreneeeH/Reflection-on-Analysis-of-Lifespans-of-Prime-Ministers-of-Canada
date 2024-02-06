@@ -124,7 +124,7 @@ While using the original code provided in Telling Stories With Data - 7 Gather d
 
 # Comments
 
-Surprisingly, I was not upset that the code provided to us in Telling Stories With Data - 7 Gather data [@TellingStories] did not work flawlessly, rather, it was fun to go through the code and actually understand what was happening and be able to fix the errors. I enjoyed learning how to use and write regular expressions and use unfamiliar functions, such as html_element(). 
+Surprisingly, I was not upset that the code provided to us in Telling Stories With Data - 7 Gather data [@TellingStories] did not work flawlessly, rather, it was fun to go through the code and actually understand what was happening and be able to fix the errors. I enjoyed learning how to use and write regular expressions and using unfamiliar functions, such as html_element(). 
 
 If I were to do this paper again, I would start much earlier to prevent the anxious feeling of not understanding the code and worrying I won't fix errors in time. 
 
