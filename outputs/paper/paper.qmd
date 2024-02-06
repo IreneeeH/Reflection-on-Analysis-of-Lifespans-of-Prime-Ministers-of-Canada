@@ -2,7 +2,7 @@
 title: "Reflection on Analysis of Lifespans of Prime Ministers of Canada"
 author: 
   - Irene Huynh
-thanks: "Code is available at: https://github.com/IreneeeH/STA302_Mini-Essay_5a.git"
+thanks: "Code is available at: https://github.com/IreneeeH/Reflection-on-Analysis-of-Lifespans-of-Prime-Ministers-of-Canada.git"
 date: today
 date-format: long
 format: pdf
