@@ -9,18 +9,16 @@
 
 
 #### Workspace setup ####
-library(opendatatoronto)
 library(tidyverse)
-# [...UPDATE THIS...]
+library(pdftools)
+library(rvest)
+library(xml2)
 
 #### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
-
-
+raw_data <-
+  read_html(
+    "https://en.wikipedia.org/wiki/List_of_prime_ministers_of_Canada"
+  )
 
 #### Save data ####
-# [...UPDATE THIS...]
-# change the_raw_data to whatever name you assigned when you downloaded it.
-write_csv(the_raw_data, "inputs/data/raw_data.csv") 
-
-         
+write_html(raw_data, "inputs/data/pms.html")
